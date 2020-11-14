@@ -1,14 +1,21 @@
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import Layout, { siteTitle } from '../components/layout'
+import Layout from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData } from '../lib/posts'
+import { getSortedPostsData, PostData } from '../lib/posts'
 
-export default function Home({ allPostsData }) {
+export const SITE_TITLE = 'Next.js Sample Website'
+
+interface Props {
+  allPostsData: PostData[]
+}
+
+export default function Home({ allPostsData }: Props): JSX.Element {
   return (
     <>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{SITE_TITLE}</title>
       </Head>
     
       <Layout home>
@@ -41,7 +48,7 @@ export default function Home({ allPostsData }) {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   return {
     props: {
       allPostsData: getSortedPostsData()
