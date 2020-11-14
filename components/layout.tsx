@@ -1,13 +1,18 @@
+import React from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
+import { SITE_TITLE } from '../pages'
 
-const name = 'Jhai Navarro'
+interface Props {
+  children: React.ReactNode,
+  home?: boolean
+}
 
-export const siteTitle = 'Next.js Sample Website'
+export default function Layout({ children, home }: Props): JSX.Element {
+  const NAME = 'Jhai Navarro'
 
-export default function Layout({ children, home }) {
   return (
     <>
       <Head>
@@ -19,10 +24,10 @@ export default function Layout({ children, home }) {
         <meta
           property="og:image"
           content={`https://og-image.now.sh/${encodeURI(
-            siteTitle
+            SITE_TITLE
           )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
         />
-        <meta name="og:title" content={siteTitle} />
+        <meta name="og:title" content={SITE_TITLE} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
@@ -33,9 +38,9 @@ export default function Layout({ children, home }) {
               <img
                 src="/images/profile.jpg"
                 className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
-                alt={name}
+                alt={NAME}
               />
-              <h1 className={utilStyles.heading2Xl}>{name}</h1>
+              <h1 className={utilStyles.heading2Xl}>{NAME}</h1>
             </>
           ) : (
             <>
@@ -44,13 +49,13 @@ export default function Layout({ children, home }) {
                   <img
                     src="/images/profile.jpg"
                     className={`${styles.headerImage} ${utilStyles.borderCircle}`}
-                    alt={name}
+                    alt={NAME}
                   />
                 </a>
               </Link>
               <h2 className={utilStyles.headingLg}>
                 <Link href="/">
-                  <a className={utilStyles.colorInherit}>{name}</a>
+                  <a className={utilStyles.colorInherit}>{NAME}</a>
                 </Link>
               </h2>
             </>
